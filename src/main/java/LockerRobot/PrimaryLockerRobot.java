@@ -1,15 +1,12 @@
 package LockerRobot;
 
 import LockerRobot.exception.NoLockerException;
-import LockerRobot.exception.NotFoundBagException;
 import LockerRobot.exception.WrongSizeException;
 import com.google.common.collect.Lists;
 
 import java.util.List;
-import java.util.Optional;
 
-public class PrimaryLockerRobot {
-    private final List<Locker> lockers;
+public class PrimaryLockerRobot extends LockerRobot {
     private int curIndex = 0;
 
     public PrimaryLockerRobot() {
@@ -26,18 +23,10 @@ public class PrimaryLockerRobot {
         this.lockers = lockers;
     }
 
+    @Override
     public Ticket save(Bag bag) {
         int cur = curIndex % lockers.size();
         curIndex++;
         return lockers.get(cur).save(bag);
-    }
-
-    public Bag take(Ticket ticket) {
-        Optional<Locker> first = this.lockers.stream().filter(locker1 -> locker1.contains(ticket)).findFirst();
-        if (first.isEmpty()) {
-            throw new NotFoundBagException();
-        }
-        Locker locker = first.get();
-        return locker.take(ticket);
     }
 }

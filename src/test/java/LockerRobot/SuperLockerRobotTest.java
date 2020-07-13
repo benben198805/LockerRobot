@@ -7,6 +7,8 @@ import com.google.common.collect.Lists;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.List;
+
 public class SuperLockerRobotTest {
     @Test
     public void should_save_bag_for_custom() {
@@ -71,5 +73,22 @@ public class SuperLockerRobotTest {
     @Test(expected = WrongSizeException.class)
     public void should_throw_exception_when_init_super_locker_robot_with_l_locker() {
         new SuperLockerRobot(Lists.newArrayList(new Locker(BoxSize.SIZE_M), new Locker(BoxSize.SIZE_L)));
+    }
+    
+    @Test
+    public void should_get_bag_for_multi_lockers_by_min() {
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot(Lists.newArrayList(new Locker(BoxSize.SIZE_L), new Locker(BoxSize.SIZE_L)));
+
+        Bag bag1 = new Bag(BoxSize.SIZE_L);
+        superLockerRobot.save(bag1);
+
+        List<Integer> lockersCount = superLockerRobot.getLockersCount();
+        Assert.assertEquals(lockersCount, Lists.newArrayList(1, 0));
+
+        Bag bag2 = new Bag(BoxSize.SIZE_L);
+        superLockerRobot.save(bag2);
+
+        lockersCount = superLockerRobot.getLockersCount();
+        Assert.assertEquals(lockersCount, Lists.newArrayList(1, 1));
     }
 }

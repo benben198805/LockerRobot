@@ -8,6 +8,7 @@ import com.google.common.collect.Lists;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class SuperLockerRobot {
     private final List<Locker> lockers;
@@ -26,8 +27,12 @@ public class SuperLockerRobot {
         this.lockers = lockers;
     }
 
+    public List<Integer> getLockersCount() {
+        return this.lockers.stream().map(Locker::getCount).collect(Collectors.toList());
+    }
+
     public Ticket save(Bag bag) {
-        Locker lowCountLocker = lockers.stream().min(Comparator.comparing(Locker::getSize)).get();
+        Locker lowCountLocker = lockers.stream().min(Comparator.comparing(Locker::getCount)).get();
         return lowCountLocker.save(bag);
     }
 
