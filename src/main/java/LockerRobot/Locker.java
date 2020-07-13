@@ -1,5 +1,8 @@
 package LockerRobot;
 
+import LockerRobot.exception.NoBagException;
+import LockerRobot.exception.WrongSizeException;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -13,6 +16,9 @@ public class Locker {
     }
 
     public UUID save(Bag bag) {
+        if(!bag.getSize().equals(size)){
+            throw new WrongSizeException();
+        }
         UUID uuid = UUID.randomUUID();
         bags.put(uuid, bag);
         return uuid;
