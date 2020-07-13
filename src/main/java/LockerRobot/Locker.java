@@ -12,4 +12,8 @@ public class Locker {
         bags.put(uuid, bag);
         return uuid;
     }
+
+    public Bag take(UUID uuid) {
+        return bags.get(uuid);
+    }
 }
