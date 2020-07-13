@@ -5,28 +5,27 @@ import LockerRobot.exception.WrongSizeException;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 public class Locker {
     private final String size;
-    Map<UUID, Bag> bags = new HashMap<>();
+    Map<Ticket, Bag> bags = new HashMap<>();
 
     public Locker(String size) {
         this.size = size;
     }
 
-    public UUID save(Bag bag) {
+    public Ticket save(Bag bag) {
         if(!bag.getSize().equals(size)){
             throw new WrongSizeException();
         }
-        UUID uuid = UUID.randomUUID();
-        bags.put(uuid, bag);
-        return uuid;
+        Ticket ticket = new Ticket();
+        bags.put(ticket, bag);
+        return ticket;
     }
 
-    public Bag take(UUID uuid) {
-        if (bags.containsKey(uuid)) {
-            return bags.remove(uuid);
+    public Bag take(Ticket ticket) {
+        if (bags.containsKey(ticket)) {
+            return bags.remove(ticket);
         }
         throw new NoBagException();
     }

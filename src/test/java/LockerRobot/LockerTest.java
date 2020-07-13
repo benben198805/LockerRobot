@@ -5,8 +5,6 @@ import LockerRobot.exception.WrongSizeException;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.UUID;
-
 import static org.junit.Assert.assertNotNull;
 
 public class LockerTest {
@@ -15,7 +13,9 @@ public class LockerTest {
     public void should_return_key_when_save_s_bag_for_s_locker() {
         Locker locker = new Locker(BoxSize.SIZE_S.getValue());
 
-        assertNotNull("should return uuid for bag", locker.save(new Bag(BoxSize.SIZE_S.getValue())));
+        Ticket ticket = locker.save(new Bag(BoxSize.SIZE_S.getValue()));
+
+        Assert.assertNotNull(ticket);
     }
 
     @Test
@@ -23,16 +23,16 @@ public class LockerTest {
         Locker locker = new Locker(BoxSize.SIZE_S.getValue());
         Bag bag = new Bag(BoxSize.SIZE_S.getValue());
 
-        UUID uuid = locker.save(bag);
+        Ticket ticket = locker.save(bag);
 
-        Assert.assertEquals(bag, locker.take(uuid));
+        Assert.assertEquals(bag, locker.take(ticket));
     }
 
     @Test(expected = NoBagException.class)
     public void should_throw_exception_when_bag_already_take() {
         Locker locker = new Locker(BoxSize.SIZE_S.getValue());
         Bag bag = new Bag(BoxSize.SIZE_S.getValue());
-        UUID uuid = locker.save(bag);
+        Ticket uuid = locker.save(bag);
 
         locker.take(uuid);
         locker.take(uuid);
