@@ -11,7 +11,6 @@ plugins {
     id 'java'
 
     // Apply the application plugin to add support for building a CLI application.
-    id 'application'
     id 'idea'
 }
 
@@ -27,9 +26,4 @@ dependencies {
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
-}
-
-application {
-    // Define the main class for the application.
-    mainClassName = 'LockerRobot.App'
 }
