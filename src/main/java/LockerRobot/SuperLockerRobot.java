@@ -5,12 +5,12 @@ import LockerRobot.exception.NotFoundBagException;
 import LockerRobot.exception.WrongSizeException;
 import com.google.common.collect.Lists;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
 public class SuperLockerRobot {
     private final List<Locker> lockers;
-    private int curIndex = 0;
 
     public SuperLockerRobot() {
         this.lockers = Lists.newArrayList(new Locker(BoxSize.SIZE_L));
@@ -27,9 +27,8 @@ public class SuperLockerRobot {
     }
 
     public Ticket save(Bag bag) {
-        int cur = curIndex % lockers.size();
-        curIndex++;
-        return lockers.get(cur).save(bag);
+        Locker lowCountLocker = lockers.stream().min(Comparator.comparing(Locker::getSize)).get();
+        return lowCountLocker.save(bag);
     }
 
     public Bag take(Ticket ticket) {

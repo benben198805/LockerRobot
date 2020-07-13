@@ -18,6 +18,10 @@ public class Locker {
         return size;
     }
 
+    public int getCount() {
+        return bags.size();
+    }
+
     public Ticket save(Bag bag) {
         if (!bag.getSize().equals(size)) {
             throw new WrongSizeException();
