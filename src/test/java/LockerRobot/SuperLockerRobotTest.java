@@ -12,62 +12,62 @@ import java.util.List;
 public class SuperLockerRobotTest {
     @Test
     public void should_save_bag_for_custom() {
-        SuperLockerRobot superLockerRobot = new SuperLockerRobot();
+        LockerRobot lockerRobot = new SuperLockerRobot();
 
-        Ticket ticket = superLockerRobot.save(new Bag(BoxSize.SIZE_L));
+        Ticket ticket = lockerRobot.save(new Bag(BoxSize.SIZE_L));
 
         Assert.assertNotNull(ticket);
     }
 
     @Test(expected = WrongSizeException.class)
     public void should_throw_exception_when_save_M_bag() {
-        SuperLockerRobot superLockerRobot = new SuperLockerRobot();
+        LockerRobot lockerRobot = new SuperLockerRobot();
 
-        superLockerRobot.save(new Bag(BoxSize.SIZE_M));
+        lockerRobot.save(new Bag(BoxSize.SIZE_M));
     }
 
     @Test
     public void should_save_bag_for_multi_lockers() {
-        SuperLockerRobot superLockerRobot = new SuperLockerRobot(Lists.newArrayList(new Locker(BoxSize.SIZE_L), new Locker(BoxSize.SIZE_L)));
+        LockerRobot lockerRobot = new SuperLockerRobot(Lists.newArrayList(new Locker(BoxSize.SIZE_L), new Locker(BoxSize.SIZE_L)));
 
-        Ticket ticket = superLockerRobot.save(new Bag(BoxSize.SIZE_L));
+        Ticket ticket = lockerRobot.save(new Bag(BoxSize.SIZE_L));
 
         Assert.assertNotNull(ticket);
     }
 
     @Test(expected = NoLockerException.class)
     public void should_throw_exception_when_save_bag_for_multi_lockers() {
-        SuperLockerRobot superLockerRobot = new SuperLockerRobot(Lists.newArrayList());
+        LockerRobot lockerRobot = new SuperLockerRobot(Lists.newArrayList());
 
-        superLockerRobot.save(new Bag(BoxSize.SIZE_L));
+        lockerRobot.save(new Bag(BoxSize.SIZE_L));
     }
 
     @Test
     public void should_get_bag_for_multi_lockers() {
-        SuperLockerRobot superLockerRobot = new SuperLockerRobot(Lists.newArrayList(new Locker(BoxSize.SIZE_L), new Locker(BoxSize.SIZE_L)));
+        LockerRobot lockerRobot = new SuperLockerRobot(Lists.newArrayList(new Locker(BoxSize.SIZE_L), new Locker(BoxSize.SIZE_L)));
 
         Bag bag1 = new Bag(BoxSize.SIZE_L);
-        Ticket ticket1 = superLockerRobot.save(bag1);
+        Ticket ticket1 = lockerRobot.save(bag1);
 
         Bag bag2 = new Bag(BoxSize.SIZE_L);
-        Ticket ticket2 = superLockerRobot.save(bag2);
+        Ticket ticket2 = lockerRobot.save(bag2);
 
-        Assert.assertEquals(bag2, superLockerRobot.take(ticket2));
-        Assert.assertEquals(bag1, superLockerRobot.take(ticket1));
+        Assert.assertEquals(bag2, lockerRobot.take(ticket2));
+        Assert.assertEquals(bag1, lockerRobot.take(ticket1));
     }
 
     @Test(expected = NotFoundBagException.class)
     public void should_throw_exception_when_take_bag_twice() {
-        SuperLockerRobot superLockerRobot = new SuperLockerRobot(Lists.newArrayList(new Locker(BoxSize.SIZE_L), new Locker(BoxSize.SIZE_L)));
+        LockerRobot lockerRobot = new SuperLockerRobot(Lists.newArrayList(new Locker(BoxSize.SIZE_L), new Locker(BoxSize.SIZE_L)));
 
         Bag bag1 = new Bag(BoxSize.SIZE_L);
-        Ticket ticket1 = superLockerRobot.save(bag1);
+        Ticket ticket1 = lockerRobot.save(bag1);
 
         Bag bag2 = new Bag(BoxSize.SIZE_L);
-        superLockerRobot.save(bag2);
+        lockerRobot.save(bag2);
 
-        superLockerRobot.take(ticket1);
-        superLockerRobot.take(ticket1);
+        lockerRobot.take(ticket1);
+        lockerRobot.take(ticket1);
     }
 
     @Test(expected = WrongSizeException.class)
@@ -77,18 +77,18 @@ public class SuperLockerRobotTest {
     
     @Test
     public void should_get_bag_for_multi_lockers_by_min() {
-        SuperLockerRobot superLockerRobot = new SuperLockerRobot(Lists.newArrayList(new Locker(BoxSize.SIZE_L), new Locker(BoxSize.SIZE_L)));
+        LockerRobot lockerRobot = new SuperLockerRobot(Lists.newArrayList(new Locker(BoxSize.SIZE_L), new Locker(BoxSize.SIZE_L)));
 
         Bag bag1 = new Bag(BoxSize.SIZE_L);
-        superLockerRobot.save(bag1);
+        lockerRobot.save(bag1);
 
-        List<Integer> lockersCount = superLockerRobot.getLockersCount();
+        List<Integer> lockersCount = lockerRobot.getLockersCount();
         Assert.assertEquals(lockersCount, Lists.newArrayList(1, 0));
 
         Bag bag2 = new Bag(BoxSize.SIZE_L);
-        superLockerRobot.save(bag2);
+        lockerRobot.save(bag2);
 
-        lockersCount = superLockerRobot.getLockersCount();
+        lockersCount = lockerRobot.getLockersCount();
         Assert.assertEquals(lockersCount, Lists.newArrayList(1, 1));
     }
 }
