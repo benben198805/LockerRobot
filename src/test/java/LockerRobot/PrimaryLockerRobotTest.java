@@ -1,5 +1,6 @@
 package LockerRobot;
 
+import LockerRobot.exception.NoLockerException;
 import LockerRobot.exception.WrongSizeException;
 import com.google.common.collect.Lists;
 import org.junit.Assert;
@@ -30,5 +31,12 @@ public class PrimaryLockerRobotTest {
         Ticket ticket = primaryLockerRobot.save(new Bag(BoxSize.SIZE_M));
 
         Assert.assertNotNull(ticket);
+    }
+
+    @Test(expected = NoLockerException.class)
+    public void should_throw_exception_when_save_bag_for_multi_lockers() {
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Lists.newArrayList());
+
+        primaryLockerRobot.save(new Bag(BoxSize.SIZE_M));
     }
 }

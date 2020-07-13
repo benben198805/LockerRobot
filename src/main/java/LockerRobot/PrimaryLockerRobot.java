@@ -14,13 +14,13 @@ public class PrimaryLockerRobot {
     }
 
     public PrimaryLockerRobot(List<Locker> lockers) {
+        if (lockers.size() == 0) {
+            throw new NoLockerException();
+        }
         this.lockers = lockers;
     }
 
     public Ticket save(Bag bag) {
-        if (this.lockers.size() == 0) {
-            throw new NoLockerException();
-        }
         int cur = curIndex % lockers.size();
         return lockers.get(cur).save(bag);
     }
