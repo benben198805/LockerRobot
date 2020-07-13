@@ -9,16 +9,16 @@ import static org.junit.Assert.assertNotNull;
 
 public class LockerTest {
     @Test
-    public void should_return_key_when_save_bag() {
-        Locker locker = new Locker();
+    public void should_return_key_when_save_s_bag_for_s_locker() {
+        Locker locker = new Locker("S");
 
-        assertNotNull("should return uuid for bag", locker.save(new Bag()));
+        assertNotNull("should return uuid for bag", locker.save(new Bag("S")));
     }
 
     @Test
     public void should_return_bag_when_take_bag_by_uuid() {
-        Locker locker = new Locker();
-        Bag bag = new Bag();
+        Locker locker = new Locker("S");
+        Bag bag = new Bag("S");
 
         UUID uuid = locker.save(bag);
 
@@ -27,11 +27,25 @@ public class LockerTest {
 
     @Test(expected = NoBagException.class)
     public void should_throw_exception_when_bag_already_take() {
-        Locker locker = new Locker();
-        Bag bag = new Bag();
+        Locker locker = new Locker("S");
+        Bag bag = new Bag("S");
         UUID uuid = locker.save(bag);
 
         locker.take(uuid);
         locker.take(uuid);
+    }
+
+    @Test
+    public void should_return_key_when_save_m_bag_for_m_locker() {
+        Locker locker = new Locker("M");
+
+        assertNotNull("should return uuid for bag", locker.save(new Bag("M")));
+    }
+
+    @Test
+    public void should_return_key_when_save_l_bag_for_l_locker() {
+        Locker locker = new Locker("L");
+
+        assertNotNull("should return uuid for bag", locker.save(new Bag("L")));
     }
 }
