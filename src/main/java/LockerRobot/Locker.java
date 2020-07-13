@@ -14,6 +14,9 @@ public class Locker {
     }
 
     public Bag take(UUID uuid) {
-        return bags.remove(uuid);
+        if (bags.containsKey(uuid)) {
+            return bags.remove(uuid);
+        }
+        throw new NoBagException();
     }
 }

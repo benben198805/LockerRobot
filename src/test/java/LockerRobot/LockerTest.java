@@ -25,14 +25,13 @@ public class LockerTest {
         Assert.assertEquals(bag, locker.take(uuid));
     }
 
-    @Test
+    @Test(expected = NoBagException.class)
     public void should_throw_exception_when_bag_already_take() {
         Locker locker = new Locker();
         Bag bag = new Bag();
         UUID uuid = locker.save(bag);
 
         locker.take(uuid);
-
-        Assert.assertNull("should return null for bag", locker.take(uuid));
+        locker.take(uuid);
     }
 }
