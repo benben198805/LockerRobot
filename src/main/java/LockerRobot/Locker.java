@@ -14,6 +14,6 @@ public class Locker {
     }
 
     public Bag take(UUID uuid) {
-        return bags.get(uuid);
+        return bags.remove(uuid);
     }
 }
