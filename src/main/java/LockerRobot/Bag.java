@@ -1,13 +1,13 @@
 package LockerRobot;
 
 public class Bag {
-    private final String size;
+    private final BoxSize size;
 
-    public Bag(String size) {
+    public Bag(BoxSize size) {
         this.size = size;
     }
 
-    public String getSize() {
+    public BoxSize getSize() {
         return size;
     }
 }

@@ -4,7 +4,7 @@ public class SuperLockerRobot {
     private final Locker locker;
 
     public SuperLockerRobot() {
-        this.locker = new Locker(BoxSize.SIZE_L.getValue());
+        this.locker = new Locker(BoxSize.SIZE_L);
     }
 
     public Ticket save(Bag bag) {

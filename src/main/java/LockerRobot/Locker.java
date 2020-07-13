@@ -7,15 +7,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Locker {
-    private final String size;
+    private final BoxSize size;
     Map<Ticket, Bag> bags = new HashMap<>();
 
-    public Locker(String size) {
+    public Locker(BoxSize size) {
         this.size = size;
     }
 
     public Ticket save(Bag bag) {
-        if(!bag.getSize().equals(size)){
+        if (!bag.getSize().equals(size)) {
             throw new WrongSizeException();
         }
         Ticket ticket = new Ticket();
@@ -28,5 +28,9 @@ public class Locker {
             return bags.remove(ticket);
         }
         throw new NoBagException();
+    }
+
+    public boolean contains(Ticket ticket) {
+        return bags.containsKey(ticket);
     }
 }
