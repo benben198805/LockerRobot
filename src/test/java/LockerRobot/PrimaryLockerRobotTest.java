@@ -39,4 +39,18 @@ public class PrimaryLockerRobotTest {
 
         primaryLockerRobot.save(new Bag(BoxSize.SIZE_M));
     }
+
+    @Test
+    public void should_get_bag_for_multi_lockers() {
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Lists.newArrayList(new Locker(BoxSize.SIZE_M), new Locker(BoxSize.SIZE_M)));
+
+        Bag bag1 = new Bag(BoxSize.SIZE_M);
+        Ticket ticket1 = primaryLockerRobot.save(bag1);
+
+        Bag bag2 = new Bag(BoxSize.SIZE_M);
+        Ticket ticket2 = primaryLockerRobot.save(bag2);
+
+        Assert.assertEquals(bag2, primaryLockerRobot.take(ticket2));
+        Assert.assertEquals(bag1, primaryLockerRobot.take(ticket1));
+    }
 }
