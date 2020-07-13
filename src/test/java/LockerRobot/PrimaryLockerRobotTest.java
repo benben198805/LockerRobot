@@ -1,6 +1,7 @@
 package LockerRobot;
 
 import LockerRobot.exception.NoLockerException;
+import LockerRobot.exception.NotFoundBagException;
 import LockerRobot.exception.WrongSizeException;
 import com.google.common.collect.Lists;
 import org.junit.Assert;
@@ -52,5 +53,19 @@ public class PrimaryLockerRobotTest {
 
         Assert.assertEquals(bag2, primaryLockerRobot.take(ticket2));
         Assert.assertEquals(bag1, primaryLockerRobot.take(ticket1));
+    }
+
+    @Test(expected = NotFoundBagException.class)
+    public void should_throw_exception_when_take_bag_twice() {
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Lists.newArrayList(new Locker(BoxSize.SIZE_M), new Locker(BoxSize.SIZE_M)));
+
+        Bag bag1 = new Bag(BoxSize.SIZE_M);
+        Ticket ticket1 = primaryLockerRobot.save(bag1);
+
+        Bag bag2 = new Bag(BoxSize.SIZE_M);
+        primaryLockerRobot.save(bag2);
+
+        primaryLockerRobot.take(ticket1);
+        primaryLockerRobot.take(ticket1);
     }
 }

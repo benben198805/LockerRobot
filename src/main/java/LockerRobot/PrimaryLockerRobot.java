@@ -6,7 +6,6 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 public class PrimaryLockerRobot {
     private final List<Locker> lockers;
