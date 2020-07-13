@@ -2,6 +2,7 @@ package LockerRobot;
 
 import LockerRobot.exception.NoLockerException;
 import LockerRobot.exception.NotFoundBagException;
+import LockerRobot.exception.WrongSizeException;
 import com.google.common.collect.Lists;
 
 import java.util.List;
@@ -18,6 +19,9 @@ public class PrimaryLockerRobot {
     public PrimaryLockerRobot(List<Locker> lockers) {
         if (lockers.size() == 0) {
             throw new NoLockerException();
+        }
+        if (!lockers.stream().allMatch(locker -> locker.getSize().equals(BoxSize.SIZE_M))) {
+            throw new WrongSizeException();
         }
         this.lockers = lockers;
     }

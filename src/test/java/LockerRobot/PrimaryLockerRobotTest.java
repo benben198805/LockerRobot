@@ -7,6 +7,8 @@ import com.google.common.collect.Lists;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.awt.*;
+
 public class PrimaryLockerRobotTest {
 
     @Test
@@ -67,5 +69,10 @@ public class PrimaryLockerRobotTest {
 
         primaryLockerRobot.take(ticket1);
         primaryLockerRobot.take(ticket1);
+    }
+
+    @Test(expected = WrongSizeException.class)
+    public void should_throw_exception_when_init_primary_locker_robot_with_l_locker() {
+        new PrimaryLockerRobot(Lists.newArrayList(new Locker(BoxSize.SIZE_M), new Locker(BoxSize.SIZE_L)));
     }
 }

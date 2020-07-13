@@ -14,6 +14,10 @@ public class Locker {
         this.size = size;
     }
 
+    public BoxSize getSize() {
+        return size;
+    }
+
     public Ticket save(Bag bag) {
         if (!bag.getSize().equals(size)) {
             throw new WrongSizeException();
