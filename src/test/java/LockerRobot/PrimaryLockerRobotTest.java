@@ -7,8 +7,6 @@ import com.google.common.collect.Lists;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.awt.*;
-
 public class PrimaryLockerRobotTest {
 
     @Test
