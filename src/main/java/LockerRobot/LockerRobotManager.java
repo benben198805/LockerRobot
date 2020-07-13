@@ -30,4 +30,22 @@ public class LockerRobotManager {
         }
         return ticket;
     }
+
+    public Bag take(Ticket ticket) {
+        Bag bag;
+        switch (ticket.getSize()) {
+            case SIZE_S:
+                bag = locker.take(ticket);
+                break;
+            case SIZE_M:
+                bag = primaryLockerRobot.take(ticket);
+                break;
+            case SIZE_L:
+                bag = superLockerRobot.take(ticket);
+                break;
+            default:
+                throw new WrongSizeException();
+        }
+        return bag;
+    }
 }

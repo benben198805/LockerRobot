@@ -26,7 +26,7 @@ public class Locker {
         if (!bag.getSize().equals(size)) {
             throw new WrongSizeException();
         }
-        Ticket ticket = new Ticket();
+        Ticket ticket = new Ticket(this.size);
         bags.put(ticket, bag);
         return ticket;
     }
